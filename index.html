@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento Manual</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #121212;
+            color: #e0e0e0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #1f1f1f;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #ffffff;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .produto {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .produto img {
+            width: 100%;
+            max-width: 300px;
+            animation: float 3s infinite ease-in-out;
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .produto h2 {
+            font-size: 2em;
+            color: #ff8c00;
+        }
+
+        .produto p {
+            font-size: 1.2em;
+            color: #cccccc;
+            margin-bottom: 10px;
+        }
+
+        .info {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .info p {
+            font-size: 1.2em;
+            color: #b0b0b0;
+        }
+
+        .pix {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .pix button {
+            padding: 12px 25px;
+            font-size: 1em;
+            background: #ff8c00;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .pix button:hover {
+            background: #ffa733;
+            transform: scale(1.05);
+        }
+
+        form {
+            text-align: center;
+        }
+
+        form input, form button {
+            margin: 10px 0;
+            padding: 12px;
+            font-size: 1em;
+            width: 80%;
+            max-width: 400px;
+            border: 1px solid #444;
+            border-radius: 8px;
+            background: #222;
+            color: #fff;
+        }
+
+        form button {
+            background: #007bff;
+            color: #fff;
+            border: none;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        form button:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .success {
+            text-align: center;
+            margin-top: 20px;
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Compre Agora</h1>
+
+        <div class="produto">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIXJOSfGNlikEnFpURUSy6Cm5ZgToXzxjLW4EsG4R-VPEAe7OlCOMGeeJF&s=10" alt="Produto">
+            <h2>Produto Exclusivo</h2>
+            <p><strong>Vídeos Exclusivos | Subzinhas</strong></p>
+            <p>Descubra uma coleção de vídeos únicos e originais com Subzinhas! Qualidade garantida em cada conteúdo, entregando uma experiência incrível para todos os gostos.</p>
+            <h3>💎 Por que escolher Subzinhas?</h3>
+            <ul>
+                <li>Conteúdo exclusivo e autêntico.</li>
+                <li>Variedade de estilos para todos os públicos.</li>
+                <li><strong>SÃO MAIS DE 10TB DEPENDENDO DO PLANO QUE VOCÊ ESCOLHER.</strong></li>
+            </ul>
+            <h3>🔗 Acesso Premium</h3>
+            <p>Garanta o seu acesso agora mesmo e explore uma seleção completa de vídeos para momentos de diversão sem limites.</p>
+            <h3>Planos Disponíveis:</h3>
+            <ul>
+                <li><strong>500GB:</strong> R$10,00</li>
+                <li><strong>1TB:</strong> R$20,00</li>
+                <li><strong>8TB:</strong> R$50,00</li>
+                <li><strong>13TB:</strong> R$70,00</li>
+                <li><strong>19TB:</strong> R$100,00</li>
+            </ul>
+        </div>
+
+        <div class="info">
+            <h2>Pagamento via PIX</h2>
+            <p>Realize o pagamento para a chave PIX abaixo:</p>
+            <p><strong>Chave PIX:</strong> <span id="chave-pix">69aef21b-5c67-4169-9ed2-144390596aca</span></p>
+            <div class="pix">
+                <button onclick="copiarPix()">Copiar Chave PIX</button>
+            </div>
+        </div>
+
+        <form id="comprovante-form">
+            <h2>Enviar Comprovante</h2>
+            <input type="text" id="nome" placeholder="Seu nome completo" required><br>
+            <input type="email" id="email" placeholder="Seu email" required><br>
+            <input type="file" id="comprovante" accept="image/*,application/pdf" required><br>
+            <button type="submit">Enviar Comprovante</button>
+        </form>
+
+        <div id="success-message" class="success" style="display: none;">
+            <h2>Comprovante enviado com sucesso!</h2>
+            <p>Estamos analisando seu pagamento. Aguarde a confirmação.</p>
+        </div>
+    </div>
+
+    <script>
+        function copiarPix() {
+            const chavePix = document.getElementById('chave-pix').innerText;
+            navigator.clipboard.writeText(chavePix).then(() => {
+                alert("Chave PIX copiada com sucesso!");
+            }).catch(() => {
+                alert("Erro ao copiar a chave PIX. Copie manualmente.");
+            });
+        }
+
+        document.getElementById('comprovante-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const comprovante = document.getElementById('comprovante').files[0];
+
+            if (!nome || !email || !comprovante) {
+                alert("Preencha todos os campos e anexe o comprovante!");
+                return;
+            }
+
+            alert("Comprovante enviado com sucesso! Nome: " + nome + ", Email: " + email);
+
+            document.getElementById('success-message').style.display = 'block';
+
+            document.getElementById('comprovante-form').reset();
+        });
+    </script>
+</body>
+</html>
